@@ -1,0 +1,66 @@
+{
+    "meta": {
+      "owner": "Shohruh",
+      "email": "shohruhakew@gmail.com",
+      "telegram": "@shohruhakew"
+    },
+    "skills": [
+      { "name": "HTML", "level": 65 },
+      { "name": "CSS", "level": 60 },
+      { "name": "JavaScript", "level": 50 },
+      { "name": "JSON / API", "level": 45 }
+    ],
+    "projects": [
+      {
+        "id": "p1",
+        "title": "Mega Portfolio",
+        "desc": "Search/filter/sort, modal, favorites, theme, i18n, toasts, shortcuts. Hammasi frontend.",
+        "tags": ["ui", "portfolio", "json"],
+        "year": 2026,
+        "rating": 9.4,
+        "status": "active",
+        "url": "https://example.com"
+      },
+      {
+        "id": "p2",
+        "title": "Todo Pro (Next)",
+        "desc": "CRUD + localStorage, keyin backend va login qo‘shiladi.",
+        "tags": ["js", "crud"],
+        "year": 2026,
+        "rating": 8.6,
+        "status": "planned",
+        "url": "https://example.com"
+      },
+      {
+        "id": "p3",
+        "title": "API Dashboard (Next+)",
+        "desc": "Node.js + Express bilan API, keyin database (PostgreSQL).",
+        "tags": ["api", "backend"],
+        "year": 2026,
+        "rating": 8.9,
+        "status": "planned",
+        "url": "https://example.com"
+      },
+      {
+        "id": "p4",
+        "title": "UI Components",
+        "desc": "Button/card/form komponentlari, accessible layout va animatsiya.",
+        "tags": ["ui", "css"],
+        "year": 2025,
+        "rating": 8.2,
+        "status": "active",
+        "url": "https://example.com"
+      },
+      {
+        "id": "p5",
+        "title": "OSINT Notes (Safe)",
+        "desc": "Kiberxavfsizlik o‘rganish uchun qonuniy, xavfsiz qaydlar va resurslar.",
+        "tags": ["security", "notes"],
+        "year": 2025,
+        "rating": 8.0,
+        "status": "active",
+        "url": "https://example.com"
+      }
+    ]
+  }
+  

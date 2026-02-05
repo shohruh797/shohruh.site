@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shohruh | Mega Portfolio</title>
+  <meta name="description" content="Zamonaviy mega portfolio: search, filter, modal, favorites, theme, i18n, JSON data." />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Top progress -->
+  <div id="progress" class="progress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Bosh sahifa">
+      <span class="logo"></span>
+      <span class="brandText">Shoh<span class="muted">ruh</span></span>
+    </a>
+
+    <nav id="nav" class="nav" aria-label="Navigatsiya">
+      <a class="navlink" href="#features" data-i18n="nav_features">Funksiyalar</a>
+      <a class="navlink" href="#projects" data-i18n="nav_projects">Loyihalar</a>
+      <a class="navlink" href="#skills" data-i18n="nav_skills">Ko‘nikmalar</a>
+      <a class="navlink" href="#contact" data-i18n="nav_contact">Aloqa</a>
+    </nav>
+
+    <div class="actions">
+      <button id="langBtn" class="btn ghost" type="button" title="Til (L)" aria-label="Til">UZ</button>
+      <button id="themeBtn" class="btn ghost" type="button" title="Tema (T)" aria-label="Tema">🌙</button>
+      <button id="cmdBtn" class="btn ghost" type="button" title="Buyruqlar (?)" aria-label="Buyruqlar">⌘</button>
+      <button id="menuBtn" class="btn ghost mobileOnly" type="button" aria-label="Menu">☰</button>
+      <a class="btn" href="#contact" data-i18n="cta_contact">Bog‘lanish</a>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawerCard">
+      <div class="drawerTop">
+        <div class="drawerTitle" data-i18n="drawer_title">Menyu</div>
+        <button id="drawerClose" class="btn ghost" type="button" aria-label="Yopish">✕</button>
+      </div>
+      <a class="drawerLink" href="#features" data-i18n="nav_features">Funksiyalar</a>
+      <a class="drawerLink" href="#projects" data-i18n="nav_projects">Loyihalar</a>
+      <a class="drawerLink" href="#skills" data-i18n="nav_skills">Ko‘nikmalar</a>
+      <a class="drawerLink" href="#contact" data-i18n="nav_contact">Aloqa</a>
+      <div class="drawerHint muted" data-i18n="drawer_hint">Tez tugmalar: T (tema), L (til), / (qidirish), ? (help)</div>
+    </div>
+  </div>
+
+  <main id="home" class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="heroLeft">
+        <p class="pill" data-i18n="pill">⚡ Fullstack yo‘lida: HTML → CSS → JS → JSON</p>
+        <h1 data-i18n="hero_title">Zamonaviy, tez va chiroyli web sahifalar.</h1>
+        <p class="lead" data-i18n="hero_lead">
+          Bu demo sayt JSON’dan data yuklaydi, search/filter/sort qiladi, modal ochadi, favorites saqlaydi,
+          tema va til almashtiradi. Ha, hammasi frontend. Backend keyin.
+        </p>
+
+        <div class="heroRow">
+          <a class="btn" href="#projects" data-i18n="hero_btn_projects">Loyihalarni ko‘rish</a>
+          <button id="loadBtn" class="btn ghost" type="button" data-i18n="hero_btn_reload">Data’ni qayta yuklash</button>
+        </div>
+
+        <div class="kpis" aria-label="KPI">
+          <div class="kpi">
+            <div id="kpiProjects" class="kpiNum">0</div>
+            <div class="kpiLbl" data-i18n="kpi_projects">Loyihalar</div>
+          </div>
+          <div class="kpi">
+            <div id="kpiFav" class="kpiNum">0</div>
+            <div class="kpiLbl" data-i18n="kpi_favorites">Saqlangan</div>
+          </div>
+          <div class="kpi">
+            <div id="kpiStatus" class="kpiNum">…</div>
+            <div class="kpiLbl" data-i18n="kpi_status">Holat</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="heroRight">
+        <div class="card glass">
+          <div class="cardTop">
+            <div class="avatar">S</div>
+            <div>
+              <div class="cardTitle" data-i18n="card_title">Boshqaruv panel</div>
+              <div class="muted small" data-i18n="card_sub">Qisqa status va sozlamalar</div>
+            </div>
+          </div>
+
+          <div class="mini">
+            <div class="miniRow"><span class="muted">theme</span><span id="miniTheme">auto</span></div>
+            <div class="miniRow"><span class="muted">lang</span><span id="miniLang">uz</span></div>
+            <div class="miniRow"><span class="muted">source</span><span id="miniSource">data.json</span></div>
+          </div>
+
+          <div class="notice muted small" data-i18n="notice">
+            Maslahat: JSON fetch ishlashi uchun server bilan och (python3 -m http.server 8000).
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="grid2">
+            <div class="stat">
+              <div class="statNum" id="statToday">0</div>
+              <div class="muted small" data-i18n="stat_today">Bugungi ko‘rish</div>
+            </div>
+            <div class="stat">
+              <div class="statNum" id="statStreak">0</div>
+              <div class="muted small" data-i18n="stat_streak">Kunlik streak</div>
+            </div>
+          </div>
+          <div class="muted small" style="margin-top:10px" data-i18n="stat_hint">
+            Bu statistikalar localStorage’da saqlanadi (ya’ni brauzering unutmaydi).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+      <div class="sectionHead">
+        <h2 data-i18n="features_title">Funksiyalar</h2>
+        <p class="muted" data-i18n="features_sub">“Ko‘p funksiyali” deganing shuni nazarda tutgan bo‘lsa kerak 🙂</p>
+      </div>
+
+      <div class="cards3">
+        <article class="card feature reveal">
+          <h3 data-i18n="f1_title">Search / Filter / Sort</h3>
+          <p class="muted" data-i18n="f1_desc">Loyihalarni qidirish, tag bo‘yicha filter, reyting bo‘yicha sort.</p>
+        </article>
+        <article class="card feature reveal">
+          <h3 data-i18n="f2_title">Modal + Favorites</h3>
+          <p class="muted" data-i18n="f2_desc">Kartani bos, modal ochiladi. Yurak bos, saqlanadi.</p>
+        </article>
+        <article class="card feature reveal">
+          <h3 data-i18n="f3_title">Theme + i18n</h3>
+          <p class="muted" data-i18n="f3_desc">Dark/Light/Auto tema va UZ/EN til almashtirish.</p>
+        </article>
+        <article class="card feature reveal">
+          <h3 data-i18n="f4_title">Keyboard shortcuts</h3>
+          <p class="muted" data-i18n="f4_desc">T tema, L til, / qidirish, Esc yopish, ? yordam.</p>
+        </article>
+        <article class="card feature reveal">
+          <h3 data-i18n="f5_title">Toasts + Validation</h3>
+          <p class="muted" data-i18n="f5_desc">Xabarlar (toast) va contact form validatsiya.</p>
+        </article>
+        <article class="card feature reveal">
+          <h3 data-i18n="f6_title">Active nav + Progress</h3>
+          <p class="muted" data-i18n="f6_desc">Scroll progress va qaysi bo‘limdasan ko‘rsatadi.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <div class="sectionHead">
+        <h2 data-i18n="projects_title">Loyihalar</h2>
+        <p class="muted" data-i18n="projects_sub">Hammasi <b>data.json</b>dan. Qo‘lda azob yo‘q.</p>
+      </div>
+
+      <div class="toolbar">
+        <input id="q" class="input" type="search" placeholder="Qidirish... ( / )" />
+        <select id="tag" class="select" aria-label="Tag filter">
+          <option value="all">all</option>
+        </select>
+        <select id="sort" class="select" aria-label="Sort">
+          <option value="rating_desc">rating ↓</option>
+          <option value="rating_asc">rating ↑</option>
+          <option value="year_desc">year ↓</option>
+          <option value="year_asc">year ↑</option>
+        </select>
+
+        <button id="onlyFavBtn" class="btn ghost" type="button" data-i18n="only_fav">Faqat saqlangan</button>
+        <button id="clearFavBtn" class="btn ghost" type="button" data-i18n="clear_fav">Saqlanganlarni tozalash</button>
+      </div>
+
+      <div id="grid" class="cards3"></div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section">
+      <div class="sectionHead">
+        <h2 data-i18n="skills_title">Ko‘nikmalar</h2>
+        <p class="muted" data-i18n="skills_sub">Frontend foundation. Backend keyin “urib” keladi 😄</p>
+      </div>
+
+      <div id="skillsWrap" class="skills"></div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="sectionHead">
+        <h2 data-i18n="contact_title">Aloqa</h2>
+        <p class="muted" data-i18n="contact_sub">Hozir frontend demo. Backend ulasak, real yuboradi.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 data-i18n="contact_fast">Tezkor</h3>
+
+          <div class="kv">
+            <span class="muted">Email</span>
+            <span><a href="mailto:shohruhakew@gmail.com">shohruhakew@gmail.com</a></span>
+          </div>
+          <div class="kv">
+            <span class="muted">Telegram</span>
+            <span><a href="https://t.me/shohruhakew" target="_blank" rel="noreferrer">@shohruhakew</a></span>
+          </div>
+          <div class="kv">
+            <span class="muted">Location</span>
+            <span>Uzbekistan</span>
+          </div>
+
+          <div class="muted small" style="margin-top:10px" data-i18n="contact_hint">
+            Xohlasang keyin formani Telegram bot yoki emailga yuboradigan backend ham qilib beramiz.
+          </div>
+        </div>
+
+        <form id="form" class="card" autocomplete="off">
+          <h3 data-i18n="form_title">Xabar yuborish</h3>
+
+          <label class="label">
+            <span data-i18n="form_name">Ism</span>
+            <input class="input" name="name" required minlength="2" placeholder="Ismingiz" />
+          </label>
+
+          <label class="label">
+            <span data-i18n="form_msg">Xabar</span>
+            <textarea class="textarea" name="msg" required minlength="8" placeholder="Nima kerak?"></textarea>
+          </label>
+
+          <label class="label inline">
+            <input type="checkbox" name="agree" required />
+            <span class="muted" data-i18n="form_agree">Spam emasligini va’da qilaman.</span>
+          </label>
+
+          <button class="btn" type="submit" data-i18n="form_send">Yuborish</button>
+          <p id="formMsg" class="muted small"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span class="muted small">© <span id="year"></span> Shohruh. <span data-i18n="footer">Internet hamma narsani eslab qoladi.</span></span>
+    </footer>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modalCard" role="document">
+      <div class="modalTop">
+        <div>
+          <div id="mTitle" class="mTitle">Title</div>
+          <div id="mMeta" class="muted small">meta</div>
+        </div>
+        <button id="mClose" class="btn ghost" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <p id="mDesc" class="muted" style="margin-top:10px">desc</p>
+      <div id="mTags" class="tags" style="margin-top:10px"></div>
+
+      <div class="modalRow">
+        <a id="mLink" class="btn" href="#" target="_blank" rel="noreferrer" data-i18n="modal_open">Ochish</a>
+        <button id="mFav" class="btn ghost" type="button">♡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Command palette / help -->
+  <div id="help" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modalCard" role="document">
+      <div class="modalTop">
+        <div class="mTitle" data-i18n="help_title">Tez tugmalar</div>
+        <button id="helpClose" class="btn ghost" type="button" aria-label="Close">✕</button>
+      </div>
+      <ul class="helpList">
+        <li><span class="key">T</span><span class="muted" data-i18n="h_theme">Tema almashtirish</span></li>
+        <li><span class="key">L</span><span class="muted" data-i18n="h_lang">Til almashtirish</span></li>
+        <li><span class="key">/</span><span class="muted" data-i18n="h_search">Qidirishga fokus</span></li>
+        <li><span class="key">Esc</span><span class="muted" data-i18n="h_esc">Modal/menyu yopish</span></li>
+        <li><span class="key">?</span><span class="muted" data-i18n="h_help">Yordam oynasi</span></li>
+      </ul>
+      <div class="muted small" style="margin-top:12px" data-i18n="help_hint">
+        Bu “command palette”ning yengil varianti. Backend bo‘lsa, bundan ham ko‘p narsalar qilinadi.
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
